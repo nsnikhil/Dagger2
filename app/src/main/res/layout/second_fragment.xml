@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/verticalLinearLayout"
+    android:layout_margin="@dimen/sixteen">
+
+    <EditText
+        android:id="@+id/secondInput"
+        style="@style/stretchedHorizontally"
+        android:layout_marginBottom="@dimen/sixteen"
+        android:hint="@string/secondEnterText"
+        android:padding="@dimen/eight" />
+
+    <Button
+        android:id="@+id/secondSave"
+        style="@style/stretchedHorizontally"
+        android:layout_marginBottom="@dimen/sixteen"
+        android:text="@string/secondSave" />
+
+    <TextView
+        android:id="@+id/secondOutput"
+        style="@style/stretchedHorizontally"
+        android:layout_marginBottom="@dimen/sixteen"
+        android:padding="@dimen/eight"
+        android:text="@string/secondPlaceHolder" />
+
+    <Button
+        android:id="@+id/secondRetrieve"
+        style="@style/stretchedHorizontally"
+        android:text="@string/secondRetrieve" />
+
+</LinearLayout>

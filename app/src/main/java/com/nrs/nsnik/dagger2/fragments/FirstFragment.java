@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nrs.nsnik.dagger2.MyApplication;
 import com.nrs.nsnik.dagger2.R;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -16,6 +19,14 @@ import butterknife.Unbinder;
 public class FirstFragment extends Fragment {
 
     private Unbinder mUnbinder;
+    @Inject
+    Object mObject;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MyApplication) getActivity().getApplicationContext()).getFirstComponent().injectInFirstFragment(this);
+    }
 
     @Nullable
     @Override

@@ -1,8 +1,6 @@
 package com.nrs.nsnik.dagger2;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,16 +8,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.nrs.nsnik.dagger2.fragments.FirstFragment;
+import com.nrs.nsnik.dagger2.fragments.SecondFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String[] FRAGMENT_TAGS = {"First", "Second"};
     @BindView(R.id.mainToolbar)
     Toolbar mMainToolbar;
     @BindView(R.id.mainDrawerLayout)
@@ -30,9 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setTheme(R.style.transparentStatusBar);
-        }
+        setTheme(R.style.transparentStatusBar);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initialize(savedInstanceState);
@@ -42,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialize(Bundle savedInstanceState) {
         setSupportActionBar(mMainToolbar);
-        if (savedInstanceState != null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,new FirstFragment()).commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, new FirstFragment(), FRAGMENT_TAGS[0]).commit();
         }
     }
 
@@ -51,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.mainDrawerLayout);
-        mNavigationView = (NavigationView) findViewById(R.id.mainNavigationView);
-        mNavigationView.getMenu().getItem(0).setChecked(true);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mMainToolbar, R.string.drawerOpen, R.string.drawerClose) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -67,22 +61,27 @@ public class MainActivity extends AppCompatActivity {
         };
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                mDrawerLayout.closeDrawers();
-                switch (item.getItemId()) {
-                    case R.id.navItem1:
-                        break;
-                    case R.id.navItem2:
-                        break;
-                    case R.id.navItem3:
-                        break;
-                    case R.id.navItem4:
-                        break;
-                }
-                return false;
+        mNavigationView.setNavigationItemSelectedListener(item -> {
+            mDrawerLayout.closeDrawers();
+            switch (item.getItemId()) {
+                case R.id.navItem1:
+                    if (getFragmentManager().findFragmentByTag(FRAGMENT_TAGS[0]) == null) {
+                        replaceFragment(new FirstFragment(), FRAGMENT_TAGS[0]);
+                    }
+                    break;
+                case R.id.navItem2:
+                    if (getFragmentManager().findFragmentByTag(FRAGMENT_TAGS[1]) == null) {
+                        replaceFragment(new SecondFragment(), FRAGMENT_TAGS[1]);
+                    }
+                    break;
+                case R.id.navItem3:
+                    break;
+                case R.id.navItem4:
+                    break;
+                case R.id.navItem5:
+                    break;
             }
+            return false;
         });
     }
 
