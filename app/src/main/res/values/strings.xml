@@ -5,6 +5,8 @@
     <string name="imageDescription">Image</string>
     <string name="imageError">Error</string>
     <string name="switchFragment">Nothing here switch to second item</string>
+    <string name="thirdMessage">For now i know that file cannot be instantiated using di since it requires a parameter and di dosenot know how to create that parameter
+                                \n \n eg : File requires a path which is of type string but di does not which string to create since there are a lot of strings out there</string>
 
     <!--second frag-->
     <string name="secondEnterText">Enter Text</string>
@@ -12,6 +14,14 @@
     <string name="secondPlaceHolder">Place Holder</string>
     <string name="secondRetrieve">Retrieve</string>
     <string name="secondError">Can\'t save nothing</string>
+    <!-- -->
+
+    <!--second frag-->
+    <string name="thirdEnterText">Enter Text</string>
+    <string name="thirdSave">Save to file</string>
+    <string name="thirdPlaceHolder">Place Holder</string>
+    <string name="thirdRetrieve">Retrieve from file</string>
+    <string name="thirdError">Can\'t save nothing</string>
     <!-- -->
 
     <!-- sharedPrefrenceKeys-->
@@ -24,6 +34,9 @@
     <string name="navItem3">File Storage</string>
     <string name="navItem4">Sqlite Db</string>
     <string name="navItem5">Network</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- -->
 
 </resources>
